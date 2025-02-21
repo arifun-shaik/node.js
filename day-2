@@ -1,0 +1,76 @@
+Working with Directories in Node.js
+We’ll learn how to:
+✅ Create a folder (fs.mkdir)
+✅ Check if a folder exists (fs.existsSync)
+✅ Delete a folder (fs.rmdir or fs.rm)
+
+const fs = require('fs');
+
+// Create a directory named "myFolder"
+fs.mkdir('myFolder', (err) => {
+    if (err) {
+        console.error('Error creating folder:', err);
+        return;
+    }
+    console.log('Folder created successfully!');
+});
+
+Explanation:
+fs.mkdir('myFolder', callback) creates a new folder.
+If the folder already exists, it throws an error.
+
+2. Checking If a Folder Exists (fs.existsSync)
+Before creating a folder, we can check if it already exists.
+
+const folderName = 'myFolder';
+
+if (!fs.existsSync(folderName)) {
+    fs.mkdir(folderName, (err) => {
+        if (err) {
+            console.error('Error creating folder:', err);
+            return;
+        }
+        console.log('Folder created successfully!');
+    });
+} else {
+    console.log('Folder already exists.');
+}
+
+xplanation:
+fs.existsSync(folderName) checks if the folder exists.
+If it doesn’t exist, it creates it.
+If it already exists, it logs a message.
+
+3. Deleting a Folder (fs.rmdir or fs.rm)
+If you want to delete myFolder, use fs.rmdir() (for empty folders) or fs.rm() (for folders with files).
+
+fs.rmdir('myFolder', (err) => {
+    if (err) {
+        console.error('Error deleting folder:', err);
+        return;
+    }
+    console.log('Folder deleted successfully!');
+});
+
+👉 Note: If myFolder contains files, use:
+fs.rm('myFolder', { recursive: true }, (err) => {
+    if (err) {
+        console.error('Error deleting folder:', err);
+        return;
+    }
+    console.log('Folder deleted successfully!');
+});
+
+Final Thoughts:
+Use fs.rm('folder') only for empty folders.
+Use fs.rm('folder', { recursive: true }) for folders with files inside.
+If you only want to delete empty folders, fs.rmdir() still works.
+
+Key Differences Between fs.rm() and fs.rmdir()
+Method	            Deletes Empty Folder?	      Deletes Non-Empty Folder?
+fs.rm('folder')	          ✅ Yes	               ❌ No (throws error)
+fs.rm('folder',
+{ recursive: true })	    ✅ Yes	               ✅ Yes
+fs.rmdir('folder')	      ✅ Yes	               ❌ No (throws error)
+
+
