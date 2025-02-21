@@ -36,7 +36,7 @@ if (!fs.existsSync(folderName)) {
     console.log('Folder already exists.');
 }
 
-xplanation:
+Explanation:
 fs.existsSync(folderName) checks if the folder exists.
 If it doesn’t exist, it creates it.
 If it already exists, it logs a message.
